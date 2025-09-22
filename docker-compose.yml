@@ -6,6 +6,7 @@ services:
     ports:
       - "9092:9092"
       - "19092:19092"
+      - "9102:9102"  
     environment:
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_NODE_ID: 1
@@ -19,8 +20,13 @@ services:
       KAFKA_CLUSTER_ID: "ohEfzflmT6-TloTKzfp5YA"
       CLUSTER_ID: "ohEfzflmT6-TloTKzfp5YA"
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_OPTS: "-javaagent:/opt/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=9102:/opt/jmx_exporter/kafka-jmx-exporter-config.yaml"
+
     volumes:
       - ./data/kafka-1:/var/lib/kafka/data
+      - ./jmx_prometheus_javaagent-0.20.0.jar:/opt/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar
+      - ./kafka-jmx-exporter-config.yaml:/opt/jmx_exporter/kafka-jmx-exporter-config.yaml
+
     networks:
       - kafka-net
 
@@ -31,6 +37,7 @@ services:
     ports:
       - "9093:9092"
       - "19093:19092"
+      - "9103:9103"
     environment:
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_NODE_ID: 2
@@ -44,9 +51,13 @@ services:
       KAFKA_CLUSTER_ID: "ohEfzflmT6-TloTKzfp5YA"
       CLUSTER_ID: "ohEfzflmT6-TloTKzfp5YA"
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_OPTS: "-javaagent:/opt/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=9103:/opt/jmx_exporter/kafka-jmx-exporter-config.yaml"
 
     volumes:
       - ./data/kafka-2:/var/lib/kafka/data
+      - ./jmx_prometheus_javaagent-0.20.0.jar:/opt/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar
+      - ./kafka-jmx-exporter-config.yaml:/opt/jmx_exporter/kafka-jmx-exporter-config.yaml
+
     networks:
       - kafka-net
 
@@ -57,6 +68,7 @@ services:
     ports:
       - "9094:9092"
       - "19094:19092"
+      - "9104:9104"  
     environment:
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_NODE_ID: 3
@@ -70,11 +82,16 @@ services:
       KAFKA_CLUSTER_ID: "ohEfzflmT6-TloTKzfp5YA"
       CLUSTER_ID: "ohEfzflmT6-TloTKzfp5YA"
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_OPTS: "-javaagent:/opt/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=9104:/opt/jmx_exporter/kafka-jmx-exporter-config.yaml"
 
     volumes:
       - ./data/kafka-3:/var/lib/kafka/data
+      - ./jmx_prometheus_javaagent-0.20.0.jar:/opt/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar
+      - ./kafka-jmx-exporter-config.yaml:/opt/jmx_exporter/kafka-jmx-exporter-config.yaml
+
     networks:
       - kafka-net
+
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     container_name: kafka-ui
