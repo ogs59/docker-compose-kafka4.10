@@ -109,8 +109,7 @@ kafka-jmx-exporter-config.yaml
 
 KAFKA_OPTS: "-javaagent:/opt/jmx_exporter/jmx_prometheus_javaagent-0.20.0.jar=9102:/opt/jmx_exporter/kafka-jmx-exporter-config.yaml"
 
-在prometheus 增加job就可以抓取信息
+在prometheus 增加job就可以采集信息。
 
-在提供一个监控dashboard，有兴趣可以导入看看。
-
-kafka-jmx-dashboard.json,直接在grafana中导入json文件即可。
+在提供一个监控dashboard，kafka-jmx-dashboard.json，直接导入json文件。
+grafana的10973，11962也很不错。
