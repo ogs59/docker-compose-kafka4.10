@@ -3,10 +3,8 @@
 前言
 Docker-compose快速部署kafka集群，镜像版本7.7.1对镜kafka4.1，本次部署基于kraft
 
-## 一.
 
-
-## 二. 部署须知
+## 一. 部署须知
 
 项目文件夹权限问题，第一次docker-compose up -d 必定失败，给目录赋权。
 
@@ -16,7 +14,7 @@ chmod 755 data
 
 ```
 
-## 三. 预处理
+## 二. 预处理
 
 kraft版启动时必须拿到 KAFKA_CLUSTER_ID 环境变量，或者已经在数据目录中发现过 meta.properties 文件中的 cluster.id
 
@@ -54,7 +52,7 @@ bootstrap.checkpoint  meta.properties
 
 新生成的文件记得chown -R 1000.1000 data/broker-{1..3}，否则是启动失败。
 
-## 环境变量配置
+## 三. 环境变量配置
 
 1. uuid这个坑比较大，启动了数十次秒失败，查看日志uuid获取不到，弄的焦头烂额，跟ai无数次拉扯，最后才招了，通过CLUSTER_ID 获取的，跟KAFKA_CLUSTER_ID没半毛钱关系
 
@@ -78,7 +76,7 @@ bootstrap.checkpoint  meta.properties
 ```
 
 
-## 启动
+## 四. 启动
 
 ```
 [root@anolios-01 docker-compose-kafka4.10]# 
@@ -100,8 +98,6 @@ fe6ff668c345   confluentinc/cp-kafka:7.7.1     "/etc/confluent/dock…"   3 seco
 [root@anolios-01 docker-compose-kafka4.10]# 
 ```
 
-
-## 简单测试
 
 
 
